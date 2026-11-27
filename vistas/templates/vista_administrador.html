@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block titulo %}Administrador · PoliRestaurante{% endblock %}
+{% block encabezado %}
+  <span>Administrador: {{ nombre }}</span><span class="espacio"></span>
+  <span id="tiempoReal" class="tiempo-real"></span>
+  <button data-salir>Cerrar sesión</button>
+{% endblock %}
+{% block contenido %}
+<section>
+  <div class="fila" style="justify-content:space-between"><h2>Panel general de pedidos</h2><button class="secundario" id="btnRecargar">Actualizar</button></div>
+  <div id="msgPanel" class="msg"></div>
+  <div style="overflow-x:auto"><table id="panel"></table></div>
+</section>
+
+<div class="dos">
+  <section>
+    <h2 id="tituloForm">Nuevo producto</h2>
+    <form id="formProducto" style="display:grid;gap:.6rem">
+      <label>Nombre<input id="nombre" maxlength="100"></label>
+      <label>Descripción (incluya los ingredientes)<textarea id="descripcion" rows="3"></textarea></label>
+      <div class="fila">
+        <label>Precio<input id="precio" inputmode="decimal" style="width:9rem"></label>
+        <label>Tipo<select id="tipo"><option value="PLATO">Plato</option><option value="BEBIDA">Bebida</option></select></label>
+        <label>Disponible<select id="disponible"><option value="true">Sí</option><option value="false">No</option></select></label>
+      </div>
+      <label>Imagen (URL o ruta)<input id="imagen" maxlength="255"></label>
+      <div class="fila"><button type="submit" id="btnGuardar">Crear producto</button><button type="button" class="secundario" id="btnNuevo" hidden>Cancelar edición</button></div>
+    </form>
+    <div id="msgProducto" class="msg"></div>
+  </section>
+
+  <section>
+    <h2>Productos del menú</h2>
+    <div style="overflow-x:auto"><table id="productos"></table></div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/administrador.js') }}"></script>{% endblock %}
