@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block titulo %}Menú · PoliRestaurante{% endblock %}
+{% block encabezado %}
+  <span>Bienvenido, {{ nombre }}</span><span class="espacio"></span>
+  <span id="tiempoReal" class="tiempo-real"></span>
+  <button data-salir>Cerrar sesión</button>
+{% endblock %}
+{% block contenido %}
+<section>
+  <h2>Menú del restaurante</h2>
+  <div id="msgMenu" class="msg"></div>
+  <div id="menu" class="cuadricula"></div>
+</section>
+
+<div class="dos">
+  <section>
+    <h2>Mi carrito (pedido a domicilio)</h2>
+    <div id="carrito"></div>
+    <label style="margin-top:.6rem">Dirección de entrega
+      <input id="direccion" maxlength="255" placeholder="Calle 123 # 45-67, apto 801"></label>
+    <div class="fila" style="margin-top:.6rem"><button id="btnConfirmar">Confirmar pedido a domicilio</button></div>
+    <div id="msgPedido" class="msg"></div>
+  </section>
+
+  <section>
+    <div class="fila" style="justify-content:space-between"><h2>Mis pedidos</h2><button class="secundario" id="btnRecargar">Actualizar</button></div>
+    <div id="msgPedidos" class="msg"></div>
+    <div id="pedidos" class="cuadricula" style="grid-template-columns:1fr"></div>
+    <div id="detallePedido" class="detalle" hidden></div>
+    <div id="msgCancelar" class="msg"></div>
+  </section>
+</div>
+
+<dialog id="dlgProducto">
+  <div id="contenidoProducto"></div>
+  <div class="fila" style="margin-top:.8rem">
+    <button id="btnAgregarDetalle">Agregar al carrito</button>
+    <button class="secundario" id="btnCerrarDetalle">Cerrar</button>
+  </div>
+</dialog>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/cliente.js') }}"></script>{% endblock %}
