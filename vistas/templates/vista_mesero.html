@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block titulo %}Mesero · PoliRestaurante{% endblock %}
+{% block encabezado %}
+  <span>Mesero: {{ nombre }}</span><span class="espacio"></span>
+  <span id="tiempoReal" class="tiempo-real"></span>
+  <button data-salir>Cerrar sesión</button>
+{% endblock %}
+{% block contenido %}
+<div class="dos">
+  <section>
+    <h2>Nuevo pedido de mesa</h2>
+    <form id="formPedido" style="display:grid;gap:.6rem">
+      <div class="fila">
+        <label>Mesa (id)<input type="number" id="mesa" min="1" required style="width:6rem"></label>
+        <label>Cliente (id) <input type="number" id="cliente" min="1" value="1" required style="width:6rem"></label>
+      </div>
+      <p class="suave" style="margin:0">Cliente 1 = "Cliente en mesa" (comensal sin cuenta).</p>
+      <div id="lineas" style="display:grid;gap:.4rem"></div>
+      <div class="fila"><button type="button" class="secundario" id="btnLinea">+ Agregar producto</button><button type="submit">Crear pedido</button></div>
+    </form>
+    <div id="msgCrear" class="msg"></div>
+  </section>
+
+  <section>
+    <h2>Consultar un pedido</h2>
+    <form id="formConsulta" class="fila">
+      <label>Número de pedido<input type="number" id="idConsulta" min="1" required style="width:8rem"></label>
+      <button type="submit">Consultar</button>
+    </form>
+    <div id="msgConsulta" class="msg"></div>
+    <div id="resultadoConsulta" class="detalle" hidden></div>
+  </section>
+</div>
+
+<section>
+  <div class="fila" style="justify-content:space-between"><h2>Pedidos</h2><button class="secundario" id="btnRecargar">Actualizar</button></div>
+  <div id="msgPedidos" class="msg"></div>
+  <div class="dos">
+    <div id="pedidos" class="cuadricula" style="grid-template-columns:1fr"></div>
+    <div>
+      <div id="detalle" class="detalle" hidden></div>
+      <div id="accionesPedido" hidden style="margin-top:.7rem">
+        <div class="fila">
+          <label>Nuevo estado
+            <select id="nuevoEstado">
+              <option value="PENDIENTE">Pendiente</option>
+              <option value="EN PREPARACION">En preparación</option>
+              <option value="ENTREGADO">Entregado</option>
+            </select></label>
+          <button id="btnEstado">Actualizar estado</button>
+          <button class="secundario" id="btnEntregar">Marcar como entregado</button>
+          <button class="secundario" id="btnCancelar">Cancelar pedido</button>
+        </div>
+      </div>
+      <div id="msgAccion" class="msg"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Mi historial de pedidos</h2>
+  <div id="msgHistorial" class="msg"></div>
+  <table id="historial"></table>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/mesero.js') }}"></script>{% endblock %}
