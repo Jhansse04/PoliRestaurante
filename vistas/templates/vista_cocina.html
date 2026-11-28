@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block titulo %}Cocina · PoliRestaurante{% endblock %}
+{% block encabezado %}
+  <span>Cocina: {{ nombre }}</span><span class="espacio"></span>
+  <span id="tiempoReal" class="tiempo-real"></span>
+  <button data-salir>Cerrar sesión</button>
+{% endblock %}
+{% block contenido %}
+<section>
+  <div class="fila" style="justify-content:space-between"><h2>Pedidos entrantes</h2><button class="secundario" id="btnRecargar">Actualizar</button></div>
+  <div id="msgPedidos" class="msg"></div>
+  <div class="tres">
+    <div><h3>Pendientes</h3><div id="colPendientes" class="cuadricula" style="grid-template-columns:1fr"></div></div>
+    <div><h3>En preparación</h3><div id="colPreparacion" class="cuadricula" style="grid-template-columns:1fr"></div></div>
+    <div><h3>Listos</h3><div id="colListos" class="cuadricula" style="grid-template-columns:1fr"></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Detalle del pedido</h2>
+  <div id="detalle" class="detalle" hidden></div>
+  <p id="sinDetalle" class="suave">Seleccione un pedido para ver su detalle.</p>
+  <div id="accionesPedido" hidden class="fila" style="margin-top:.7rem">
+    <label>Cambiar estado a
+      <select id="nuevoEstado">
+        <option value="PENDIENTE">Pendiente</option>
+        <option value="EN PREPARACION">En preparación</option>
+        <option value="LISTO">Listo</option>
+      </select></label>
+    <button id="btnEstado">Actualizar estado</button>
+  </div>
+  <div id="msgAccion" class="msg"></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/cocina.js') }}"></script>{% endblock %}
